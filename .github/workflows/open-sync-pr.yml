@@ -1,1 +1,66 @@
 
+name: Open public sync pull request
+
+on:
+  push:
+    branches:
+      - sync/public-readiness
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: open-public-sync-pr
+  cancel-in-progress: false
+
+jobs:
+  open-pull-request:
+    name: Open sync pull request
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Create pull request if missing
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SYNC_BRANCH: sync/public-readiness
+        run: |
+          set -Eeuo pipefail
+
+          existing_pr="$(
+            gh pr list \
+              --repo "$GITHUB_REPOSITORY" \
+              --base main \
+              --head "$SYNC_BRANCH" \
+              --state open \
+              --json number \
+              --jq '.[0].number // empty'
+          )"
+
+          if [[ -n "$existing_pr" ]]; then
+            echo "Pull request #$existing_pr already exists."
+            exit 0
+          fi
+
+          short_sha="${GITHUB_SHA:0:12}"
+          pr_title="chore(sync): publish source ${short_sha}"
+
+          pr_body="$(
+            printf '%s\n\n%s\n\n%s\n%s\n%s\n%s\n%s\n' \
+              "Automated sanitized snapshot from the private source repository." \
+              "Private Git history, branches, tags, environment files and private GitHub Actions workflows are not included." \
+              "Required review:" \
+              "- inspect all changed files" \
+              "- verify security checks" \
+              "- verify dependency audit" \
+              "- verify licensing and attribution"
+          )"
+
+          gh pr create \
+            --repo "$GITHUB_REPOSITORY" \
+            --base main \
+            --head "$SYNC_BRANCH" \
+            --title "$pr_title" \
+            --body "$pr_body"
