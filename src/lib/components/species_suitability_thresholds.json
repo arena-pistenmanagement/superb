@@ -1,0 +1,258 @@
+{
+    "suitabilities": {
+        "abies_alba": [
+            31,
+            61
+        ],
+        "abies_grandis": [
+            47,
+            80
+        ],
+        "acer_campestre": [
+            38,
+            72
+        ],
+        "acer_monspessulanum": [
+            35,
+            79
+        ],
+        "acer_platanoides": [
+            34,
+            63
+        ],
+        "acer_pseudoplatanus": [
+            37,
+            68
+        ],
+        "alnus_glutinosa": [
+            39,
+            63
+        ],
+        "betula_pendula": [
+            34,
+            67
+        ],
+        "carpinus_betulus": [
+            37,
+            75
+        ],
+        "castanea_sativa": [
+            37,
+            80
+        ],
+        "fagus_sylvatica": [
+            38,
+            75
+        ],
+        "fraxinus_angustifolia": [
+            32,
+            65
+        ],
+        "fraxinus_excelsior": [
+            30,
+            70
+        ],
+        "juglans_nigra": [
+            35,
+            72
+        ],
+        "juglans_regia": [
+            32,
+            69
+        ],
+        "larix_decidua": [
+            39,
+            61
+        ],
+        "larix_kaempferi": [
+            50,
+            84
+        ],
+        "picea_abies": [
+            38,
+            73
+        ],
+        "pinus_nigra": [
+            37,
+            69
+        ],
+        "pinus_sylvestris": [
+            28,
+            66
+        ],
+        "populus_nigra": [
+            26,
+            68
+        ],
+        "prunus_avium": [
+            33,
+            69
+        ],
+        "pseudotsuga_menziesii": [
+            44,
+            77
+        ],
+        "pyrus_pyraster": [
+            37,
+            70
+        ],
+        "quercus_cerris": [
+            35,
+            77
+        ],
+        "quercus_petraea": [
+            37,
+            73
+        ],
+        "quercus_pubescens": [
+            39,
+            73
+        ],
+        "quercus_robur": [
+            31,
+            74
+        ],
+        "quercus_rubra": [
+            43,
+            73
+        ],
+        "robinia_pseudoacacia": [
+            41,
+            80
+        ],
+        "sorbus_aucuparia": [
+            32,
+            64
+        ],
+        "sorbus_domestica": [
+            41,
+            72
+        ],
+        "sorbus_torminalis": [
+            40,
+            75
+        ],
+        "tilia_cordata": [
+            36,
+            64
+        ],
+        "tilia_platyphyllos": [
+            33,
+            69
+        ],
+        "ulmus_glabra": [
+            28,
+            59
+        ],
+        "ulmus_laevis": [
+            22,
+            67
+        ],
+        "ulmus_minor": [
+            25,
+            67
+        ]
+    },
+    "productivities": {
+        "abies_alba": [
+            11.7,
+            23.8
+        ],
+        "abies_grandis": [
+            11.7,
+            23.8
+        ],
+        "acer_campestre": [
+            7.6,
+            15.4
+        ],
+        "acer_platanoides": [
+            13.2,
+            26.8
+        ],
+        "acer_pseudoplatanus": [
+            11.8,
+            24.1
+        ],
+        "alnus_glutinosa": [
+            10.8,
+            22.0
+        ],
+        "betula_pendula": [
+            9.6,
+            19.6
+        ],
+        "carpinus_betulus": [
+            9.5,
+            19.3
+        ],
+        "castanea_sativa": [
+            12.4,
+            25.2
+        ],
+        "fagus_sylvatica": [
+            11.3,
+            23.1
+        ],
+        "fraxinus_excelsior": [
+            11.1,
+            22.5
+        ],
+        "larix_decidua": [
+            11.8,
+            24.0
+        ],
+        "picea_abies": [
+            12.4,
+            25.2
+        ],
+        "pinus_nigra": [
+            9.0,
+            18.4
+        ],
+        "pinus_sylvestris": [
+            10.4,
+            21.3
+        ],
+        "prunus_avium": [
+            10.5,
+            21.4
+        ],
+        "pseudotsuga_menziesii": [
+            15.4,
+            31.3
+        ],
+        "quercus_cerris": [
+            9.5,
+            19.3
+        ],
+        "quercus_petraea": [
+            9.4,
+            19.1
+        ],
+        "quercus_pubescens": [
+            8.0,
+            16.2
+        ],
+        "quercus_robur": [
+            10.1,
+            20.6
+        ],
+        "quercus_rubra": [
+            12.5,
+            25.5
+        ],
+        "robinia_pseudoacacia": [
+            11.7,
+            23.9
+        ],
+        "sorbus_aucuparia": [
+            4.6,
+            9.4
+        ],
+        "tilia_cordata": [
+            8.2,
+            16.7
+        ]
+    }
+}
