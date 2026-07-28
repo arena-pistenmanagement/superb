@@ -1,0 +1,427 @@
+{
+    "abies_alba": [
+        {
+            "min": 0.0,
+            "max": 11.7,
+            "class": "low"
+        },
+        {
+            "min": 11.7,
+            "max": 23.8,
+            "class": "medium"
+        },
+        {
+            "min": 23.8,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "abies_grandis": [
+        {
+            "min": 0.0,
+            "max": 11.7,
+            "class": "low"
+        },
+        {
+            "min": 11.7,
+            "max": 23.8,
+            "class": "medium"
+        },
+        {
+            "min": 23.8,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "acer_campestre": [
+        {
+            "min": 0.0,
+            "max": 7.6,
+            "class": "low"
+        },
+        {
+            "min": 7.6,
+            "max": 15.4,
+            "class": "medium"
+        },
+        {
+            "min": 15.4,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "acer_platanoides": [
+        {
+            "min": 0.0,
+            "max": 13.2,
+            "class": "low"
+        },
+        {
+            "min": 13.2,
+            "max": 26.8,
+            "class": "medium"
+        },
+        {
+            "min": 26.8,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "acer_pseudoplatanus": [
+        {
+            "min": 0.0,
+            "max": 11.8,
+            "class": "low"
+        },
+        {
+            "min": 11.8,
+            "max": 24.1,
+            "class": "medium"
+        },
+        {
+            "min": 24.1,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "alnus_glutinosa": [
+        {
+            "min": 0.0,
+            "max": 10.8,
+            "class": "low"
+        },
+        {
+            "min": 10.8,
+            "max": 22.0,
+            "class": "medium"
+        },
+        {
+            "min": 22.0,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "betula_pendula": [
+        {
+            "min": 0.0,
+            "max": 9.6,
+            "class": "low"
+        },
+        {
+            "min": 9.6,
+            "max": 19.6,
+            "class": "medium"
+        },
+        {
+            "min": 19.6,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "carpinus_betulus": [
+        {
+            "min": 0.0,
+            "max": 9.5,
+            "class": "low"
+        },
+        {
+            "min": 9.5,
+            "max": 19.3,
+            "class": "medium"
+        },
+        {
+            "min": 19.3,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "castanea_sativa": [
+        {
+            "min": 0.0,
+            "max": 12.4,
+            "class": "low"
+        },
+        {
+            "min": 12.4,
+            "max": 25.2,
+            "class": "medium"
+        },
+        {
+            "min": 25.2,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "fagus_sylvatica": [
+        {
+            "min": 0.0,
+            "max": 11.3,
+            "class": "low"
+        },
+        {
+            "min": 11.3,
+            "max": 23.1,
+            "class": "medium"
+        },
+        {
+            "min": 23.1,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "fraxinus_excelsior": [
+        {
+            "min": 0.0,
+            "max": 11.1,
+            "class": "low"
+        },
+        {
+            "min": 11.1,
+            "max": 22.5,
+            "class": "medium"
+        },
+        {
+            "min": 22.5,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "larix_decidua": [
+        {
+            "min": 0.0,
+            "max": 11.8,
+            "class": "low"
+        },
+        {
+            "min": 11.8,
+            "max": 24.0,
+            "class": "medium"
+        },
+        {
+            "min": 24.0,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "picea_abies": [
+        {
+            "min": 0.0,
+            "max": 12.4,
+            "class": "low"
+        },
+        {
+            "min": 12.4,
+            "max": 25.2,
+            "class": "medium"
+        },
+        {
+            "min": 25.2,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "pinus_nigra": [
+        {
+            "min": 0.0,
+            "max": 9.0,
+            "class": "low"
+        },
+        {
+            "min": 9.0,
+            "max": 18.4,
+            "class": "medium"
+        },
+        {
+            "min": 18.4,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "pinus_sylvestris": [
+        {
+            "min": 0.0,
+            "max": 10.4,
+            "class": "low"
+        },
+        {
+            "min": 10.4,
+            "max": 21.3,
+            "class": "medium"
+        },
+        {
+            "min": 21.3,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "prunus_avium": [
+        {
+            "min": 0.0,
+            "max": 10.5,
+            "class": "low"
+        },
+        {
+            "min": 10.5,
+            "max": 21.4,
+            "class": "medium"
+        },
+        {
+            "min": 21.4,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "pseudotsuga_menziesii": [
+        {
+            "min": 0.0,
+            "max": 15.4,
+            "class": "low"
+        },
+        {
+            "min": 15.4,
+            "max": 31.3,
+            "class": "medium"
+        },
+        {
+            "min": 31.3,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "quercus_cerris": [
+        {
+            "min": 0.0,
+            "max": 9.5,
+            "class": "low"
+        },
+        {
+            "min": 9.5,
+            "max": 19.3,
+            "class": "medium"
+        },
+        {
+            "min": 19.3,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "quercus_petraea": [
+        {
+            "min": 0.0,
+            "max": 9.4,
+            "class": "low"
+        },
+        {
+            "min": 9.4,
+            "max": 19.1,
+            "class": "medium"
+        },
+        {
+            "min": 19.1,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "quercus_pubescens": [
+        {
+            "min": 0.0,
+            "max": 8.0,
+            "class": "low"
+        },
+        {
+            "min": 8.0,
+            "max": 16.2,
+            "class": "medium"
+        },
+        {
+            "min": 16.2,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "quercus_robur": [
+        {
+            "min": 0.0,
+            "max": 10.1,
+            "class": "low"
+        },
+        {
+            "min": 10.1,
+            "max": 20.6,
+            "class": "medium"
+        },
+        {
+            "min": 20.6,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "quercus_rubra": [
+        {
+            "min": 0.0,
+            "max": 12.5,
+            "class": "low"
+        },
+        {
+            "min": 12.5,
+            "max": 25.5,
+            "class": "medium"
+        },
+        {
+            "min": 25.5,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "robinia_pseudoacacia": [
+        {
+            "min": 0.0,
+            "max": 11.7,
+            "class": "low"
+        },
+        {
+            "min": 11.7,
+            "max": 23.9,
+            "class": "medium"
+        },
+        {
+            "min": 23.9,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "sorbus_aucuparia": [
+        {
+            "min": 0.0,
+            "max": 4.6,
+            "class": "low"
+        },
+        {
+            "min": 4.6,
+            "max": 9.4,
+            "class": "medium"
+        },
+        {
+            "min": 9.4,
+            "max": 100,
+            "class": "high"
+        }
+    ],
+    "tilia_cordata": [
+        {
+            "min": 0.0,
+            "max": 8.2,
+            "class": "low"
+        },
+        {
+            "min": 8.2,
+            "max": 16.7,
+            "class": "medium"
+        },
+        {
+            "min": 16.7,
+            "max": 100,
+            "class": "high"
+        }
+    ]
+}

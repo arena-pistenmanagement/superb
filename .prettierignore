@@ -1,0 +1,11 @@
+# Ignore files for PNPM, NPM and YARN
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Large generated data assets are kept in their source formatting.
+src/lib/components/co_cocurance_rules.json
+src/lib/components/combined_species_asociations.json
+src/lib/components/lookup.json
+src/lib/components/species_productivity_thresholds.json
+src/lib/components/species_suitability_thresholds.json
