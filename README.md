@@ -297,4 +297,4 @@ Exact institutional roles and the required funding statement should be confirmed
 
 ## Licence
 
-Software and documentation are provided under the terms stated in [`LICENSE`](LICENSE).
+Software and documentation are provided under the terms stated in [`LICENSE`](LICENSE.md).
