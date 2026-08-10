@@ -27,7 +27,7 @@ The current implementation considers:
 
 Suitability reflects climatic suitability only. Other important factors, including soils, forest management, competition, pests, disturbances, and local microsite conditions, may not be represented completely.
 
-### Tree productivity
+### Tree species productivity
 
 The application also presents projected tree productivity. Productivity is expressed as expected tree height at a reference age of 100 years.
 
@@ -122,8 +122,6 @@ The application currently uses or references:
 
 Availability of some application functions therefore depends on external services.
 
-Data ownership, licences, attribution requirements, and reuse conditions should be documented separately in [`NOTICE`](NOTICE).
-
 ## Technology
 
 The web application is built with:
@@ -136,8 +134,6 @@ The web application is built with:
 - [jsPDF](https://github.com/parallax/jsPDF);
 - [Vitest](https://vitest.dev/).
 
-The repository also contains Python scripts used for geospatial data preparation, including raster stacking, clipping, threshold calculation, species-data extraction, and GeoServer publication.
-
 ## Local development
 
 ### Requirements
@@ -146,14 +142,13 @@ The repository also contains Python scripts used for geospatial data preparation
 - npm;
 - access to the required public geospatial services and datasets.
 
-Python-based data processing additionally requires a geospatial Python environment. Depending on the script, this may include GDAL, GeoPandas, Rasterio, NumPy, Pandas, Requests, and GeoServer-related libraries.
-
 ### Installation
 
 ```bash
-git clone https://github.com/OWNER/superb.git
-cd seed4forest-public
+git clone https://github.com/arena-pistenmanagement/superb.git
+cd superb
 npm ci
+cp .env.example .env
 ```
 
 ### Start the development server
@@ -197,8 +192,12 @@ npm run preview
 ## Configuration
 
 Do not commit passwords, private API keys, private keys, or unrestricted service credentials.
+The application requires these public environment variables:
 
-Client-visible configuration, such as a restricted Mapbox public token, should use the deployment platform's public configuration mechanism. Server-side credentials must be supplied through protected environment variables or a dedicated secret manager.
+- `PUBLIC_MAPBOX_ACCESS_TOKEN`: a restricted public Mapbox token;
+- `PUBLIC_GEOSERVER_URL`: the GeoServer base URL without a trailing slash;
+- `PUBLIC_S3_BUCKET_URL`: the public S3 bucket URL without a trailing slash;
+- `PUBLIC_TITILER_URL`: the TiTiler API base URL without a trailing slash.
 
 Before deployment, verify:
 
@@ -222,27 +221,10 @@ src/
   routes/             SvelteKit pages and server routes
 
 static/               Public images and static assets
-scripts/              Geospatial preprocessing and publication scripts
 package.json          JavaScript dependencies and npm commands
 svelte.config.js      SvelteKit configuration
 vite.config.ts        Vite and Vitest configuration
 ```
-
-## Public-repository synchronization
-
-This repository is intended to be published as a sanitized public mirror of a private development repository.
-
-The synchronization process:
-
-1. exports only explicitly approved files;
-2. excludes private Git history, branches, tags, secrets, and deployment configuration;
-3. runs secret scanning, dependency auditing, tests, and a production build;
-4. creates a pull request through a dedicated GitHub App;
-5. requires the public repository's checks and review rules to pass.
-
-The public repository is not synchronized directly back into the private source.
-
-Public contributions should be submitted as pull requests. Accepted changes are transferred to the private source repository by the maintainers and subsequently published through the normal synchronization process.
 
 ## Security
 
@@ -258,6 +240,9 @@ Follow the instructions in [`SECURITY.md`](SECURITY.md) to report:
 - other security-sensitive findings.
 
 No operational credentials should ever be stored in this repository.
+
+Deployment and DDoS hardening requirements for Vercel and the external geospatial services are
+documented in [`DEPLOYMENT_SECURITY.md`](DEPLOYMENT_SECURITY.md).
 
 ## Limitations
 

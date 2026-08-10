@@ -27,7 +27,7 @@ Use GitHub's private vulnerability reporting feature:
 
 If private vulnerability reporting is unavailable, contact:
 
-`[INSERT SECURITY CONTACT EMAIL]`
+`julia.siemens ( at ) powergis.at`
 
 Do not publish vulnerability details before the maintainers have had a
 reasonable opportunity to investigate and address the issue.

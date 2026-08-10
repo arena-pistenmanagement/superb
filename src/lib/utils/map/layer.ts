@@ -1,6 +1,7 @@
 import type { SpeciesData } from '../types';
 import type mapboxgl from 'mapbox-gl';
 import { provenanceIsOpen, selectedDataBasis, thresholds } from '$lib/stores/map-store';
+import { geoserverUrl } from '$lib/utils/map/geoserver';
 import { get } from 'svelte/store';
 
 export default async function setLayer(element: SpeciesData, map: mapboxgl.Map) {
@@ -19,7 +20,7 @@ export default async function setLayer(element: SpeciesData, map: mapboxgl.Map) 
 		}
 
 		const boundaryResponse = await fetch(
-			`https://client-tiles.powergis.at/geoserver/bfw/${type}_${datasetName}/gwc/service/wmts?REQUEST=GetCapabilities&service=wmts&version=1.1.0`
+			`${geoserverUrl}/bfw/${type}_${datasetName}/gwc/service/wmts?REQUEST=GetCapabilities&service=wmts&version=1.1.0`
 		);
 		const text = await boundaryResponse.text();
 
@@ -29,10 +30,11 @@ export default async function setLayer(element: SpeciesData, map: mapboxgl.Map) 
 		let lowerBound: string | string[] = text.split('ows:LowerCorner')[1];
 		lowerBound = lowerBound.substring(1, lowerBound.length - 2).split(' ');
 
-		let bounds: number[] | string[] = lowerBound.concat(upperBound);
-		bounds = bounds.map(function (str) {
-			return parseFloat(str);
-		});
+		const bounds = lowerBound.concat(upperBound).map(Number) as [number, number, number, number];
+
+		if (bounds.some((value) => !Number.isFinite(value))) {
+			throw new Error('GeoServer returned invalid layer bounds');
+		}
 
 		const scale = get(selectedDataBasis) == 'Suitability' ? 'suitabilities' : 'productivities';
 		let species_thresholds = get(thresholds)[scale][element.file_name];
@@ -42,7 +44,7 @@ export default async function setLayer(element: SpeciesData, map: mapboxgl.Map) 
 		}
 
 		const url =
-			`https://client-tiles.powergis.at/geoserver/bfw/wms?layers=bfw%3A${type}_${datasetName}` +
+			`${geoserverUrl}/bfw/wms?layers=bfw%3A${type}_${datasetName}` +
 			`&bbox={bbox-epsg-3857}&format=image/png&service=WMS&version=1.3.0&request=GetMap&crs=EPSG:3857` +
 			`&transparent=true&width=256&height=256&styles=bfw:style_${type}_${band}&` +
 			`env=low:${species_thresholds[0]};medium:${species_thresholds[1]}`;

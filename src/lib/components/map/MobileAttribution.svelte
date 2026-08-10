@@ -35,23 +35,33 @@
 
 			<Dialog.Description class="text-sm text-foreground-alt">
 				<div class="text-black text-xs p-8 flex flex-col">
-					<a href="https://powergis.at/" target="_blank" title="Powergis GmbH" aria-label="Mapbox"
-						>© PowerGIS GmbH</a
+					<a
+						href="https://powergis.at/"
+						target="_blank"
+						rel="noopener noreferrer"
+						title="Powergis GmbH"
+						aria-label="Mapbox">© PowerGIS GmbH</a
 					>
 					<a
 						href="https://www.mapbox.com/about/maps/"
 						target="_blank"
+						rel="noopener noreferrer"
 						title="Mapbox"
 						aria-label="Mapbox">© Mapbox</a
 					>
 					<a
 						href="https://www.openstreetmap.org/about/"
 						target="_blank"
+						rel="noopener noreferrer"
 						title="OpenStreetMap"
 						aria-label="OpenStreetMap">© OpenStreetMap</a
 					>
-					<a href="https://www.maxar.com/" target="_blank" title="Maxar" aria-label="Maxar"
-						>© Maxar</a
+					<a
+						href="https://www.maxar.com/"
+						target="_blank"
+						rel="noopener noreferrer"
+						title="Maxar"
+						aria-label="Maxar">© Maxar</a
 					>
 				</div>
 			</Dialog.Description>

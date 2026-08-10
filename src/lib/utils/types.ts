@@ -1,7 +1,7 @@
 export enum ClimateScenarios {
-	'ref' = 'Reference',
-	'rcp45' = 'RCP4.5',
-	'rcp85' = 'RCP8.5'
+	ref = 'Reference',
+	rcp45 = 'RCP4.5',
+	rcp85 = 'RCP8.5'
 }
 
 export type ClimateScenario = 'rcp45' | 'rcp85' | 'ref';

@@ -11,6 +11,7 @@
 	} from '$lib/stores/map-store';
 	import type { SpeciesData } from '$lib/utils/types';
 	import { blackOrWhiteText } from '$lib/utils/map/color-styling';
+	import { geoserverUrl } from '$lib/utils/map/geoserver';
 
 	type ColorStep = {
 		label: string;
@@ -54,7 +55,7 @@
 		band = species.band_number;
 		datasetName = species.file_name;
 		let result = await fetch(
-			`https://client-tiles.powergis.at/geoserver/wms?REQUEST=GetLegendGraphic&Version=1.0.0&Format=application/json&Layer=bfw:${type}_${datasetName}&style=bfw:style_${type}_${band}`
+			`${geoserverUrl}/wms?REQUEST=GetLegendGraphic&Version=1.0.0&Format=application/json&Layer=bfw:${type}_${datasetName}&style=bfw:style_${type}_${band}`
 		);
 
 		if (result.ok) {

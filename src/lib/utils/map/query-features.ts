@@ -1,23 +1,41 @@
 import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import { mapbox } from './mapbox.js';
-import Mapbox from 'mapbox-gl';
+import * as mapboxgl from 'mapbox-gl';
 import { get } from 'svelte/store';
 import { lookup, lineChartData, isLoadingSpecies } from '$lib/stores/map-store';
 import { type ClimateScenario, type Dataset } from '$lib/utils/types';
 import { toast } from 'svelte-sonner';
 import CustomToast from '$lib/components/ui/sonner/CustomToast.svelte';
 import { queryClusterValue } from '$lib/utils/map/cluster-layer';
+import { s3BucketUrl, titilerUrl } from '$lib/utils/map/data-services';
 
-const baseTitilerUrl = 'https://bkcte57b5e.execute-api.eu-central-1.amazonaws.com';
 let pointQueryGeneration = 0;
+let activePointQueryController: AbortController | undefined;
 
 interface PointQueryResponse {
 	values: number[];
 }
 
 export async function queryPointFeature(lon: number, lat: number): Promise<boolean> {
+	if (
+		!Number.isFinite(lon) ||
+		!Number.isFinite(lat) ||
+		lon < -180 ||
+		lon > 180 ||
+		lat < -90 ||
+		lat > 90
+	) {
+		isLoadingSpecies.set(false);
+		toast.error('The selected location is invalid.');
+		return false;
+	}
+
+	activePointQueryController?.abort();
+	const controller = new AbortController();
+	activePointQueryController = controller;
+
 	const queryGeneration = ++pointQueryGeneration;
-	const base = baseTitilerUrl + '/cog/point/';
+	const base = `${titilerUrl}/cog/point/`;
 	const coordinates = `${lon},${lat}?`;
 	const options = 'unscale=false&resampling=nearest';
 	let outOfBoundsReported = false;
@@ -31,8 +49,10 @@ export async function queryPointFeature(lon: number, lat: number): Promise<boole
 
 		const responsesSucceeded = await Promise.all(
 			(['suitabilities', 'productivities'] as const).map(async (datasetName) => {
-				const uri = `url=https://bfwsuperb.s3.eu-central-1.amazonaws.com/${datasetName}.tif&`;
-				const response = await fetch(base + coordinates + uri + options);
+				const uri = `url=${s3BucketUrl}/${datasetName}.tif&`;
+				const response = await fetch(base + coordinates + uri + options, {
+					signal: controller.signal
+				});
 
 				if (response.status === 500 && !outOfBoundsReported) {
 					outOfBoundsReported = true;
@@ -64,7 +84,7 @@ export async function queryPointFeature(lon: number, lat: number): Promise<boole
 		}
 
 		tempLookup = orderBySubKey(tempLookup, 'suitability', 'ref');
-		tempLookup = await queryClusterValue([lon, lat], tempLookup);
+		tempLookup = await queryClusterValue([lon, lat], tempLookup, controller.signal);
 		if (queryGeneration !== pointQueryGeneration) return false;
 		lookup.set(tempLookup);
 
@@ -96,20 +116,29 @@ export async function queryPointFeature(lon: number, lat: number): Promise<boole
 		lineChartData.set(chartData);
 		return true;
 	} catch (cause) {
-		if (queryGeneration !== pointQueryGeneration) return false;
+		if (
+			controller.signal.aborted ||
+			queryGeneration !== pointQueryGeneration ||
+			(cause instanceof Error && cause.name === 'AbortError')
+		) {
+			return false;
+		}
 		console.error('Failed to load species data:', cause);
 		toast.error('Species data could not be loaded. Please try again.');
 		return false;
 	} finally {
-		if (queryGeneration === pointQueryGeneration) isLoadingSpecies.set(false);
+		if (activePointQueryController === controller) {
+			activePointQueryController = undefined;
+			isLoadingSpecies.set(false);
+		}
 	}
 }
 
 export function queryLocationFromInput() {
 	const geocoder = new MapboxGeocoder({
-		mapboxgl: Mapbox,
+		mapboxgl: mapboxgl,
 		marker: false,
-		accessToken: mapbox.accessToken,
+		accessToken: mapbox.accessToken || '',
 		localGeocoder: coordinatesGeocoder,
 		reverseGeocode: true,
 		bbox: [-10.6166657869999952, 34.5622560979999989, 38.5583381470000006, 71.1872590279999997],
@@ -219,8 +248,9 @@ const valueEnvzoneMapping: Record<string, string> = {
 };
 
 export const queryGeographicalRegion = async (coordinate: { lat: number; lon: number }) => {
-	const baseTitilerUrl = `https://bkcte57b5e.execute-api.eu-central-1.amazonaws.com/cog/point/${coordinate.lat},${coordinate.lon}?url=https%3A%2F%2Fbfwsuperb.s3.eu-central-1.amazonaws.com%2Fenv_zones.tif&bidx=1&expression=b1&unscale=false&resampling=nearest`;
-	const response = await fetch(baseTitilerUrl);
+	const environmentalZonesUrl = encodeURIComponent(`${s3BucketUrl}/env_zones.tif`);
+	const requestUrl = `${titilerUrl}/cog/point/${coordinate.lat},${coordinate.lon}?url=${environmentalZonesUrl}&bidx=1&expression=b1&unscale=false&resampling=nearest`;
+	const response = await fetch(requestUrl);
 	if (!response.ok) return;
 	const result = await response.json();
 	const value = result.values[0] as string;

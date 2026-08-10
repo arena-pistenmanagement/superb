@@ -23,6 +23,8 @@ import {
 	type SeedLocations
 } from '../types';
 import { local_provenance_species } from '$lib/components/special_species';
+import { geoserverUrl } from '$lib/utils/map/geoserver';
+import { s3BucketUrl, titilerUrl } from '$lib/utils/map/data-services';
 
 let description: string;
 
@@ -33,26 +35,28 @@ interface PointQueryResponse {
 	values: number[];
 }
 
-interface SeedFeatureCollection
-	extends GeoJSON.FeatureCollection<GeoJSON.Geometry, Omit<SeedLocations, 'distance_to_loc'>> {
+interface SeedFeatureCollection extends GeoJSON.FeatureCollection<
+	GeoJSON.Geometry,
+	Omit<SeedLocations, 'distance_to_loc'>
+> {
 	totalFeatures: number;
 }
 
 export async function queryClusterValue(
 	selectedLocation: Coordinates | undefined,
-	lookupData: Dataset
+	lookupData: Dataset,
+	signal?: AbortSignal
 ): Promise<Dataset> {
 	if (!selectedLocation) return lookupData;
 	const tempLookup = structuredClone(lookupData);
-	const baseTitilerUrl = 'https://bkcte57b5e.execute-api.eu-central-1.amazonaws.com';
-	const base = baseTitilerUrl + '/cog/point/';
+	const base = `${titilerUrl}/cog/point/`;
 	const coordinates = `${selectedLocation[0]},${selectedLocation[1]}?`;
 	const options = 'unscale=false&resampling=nearest';
 
 	await Promise.all(
 		(['rcp45', 'rcp85'] as const).map(async (scenario: ClusterScenario) => {
-			const uri = `url=https://bfwsuperb.s3.eu-central-1.amazonaws.com/cluster_${scenario}_lzw.tif&`;
-			const response = await fetch(base + coordinates + uri + options);
+			const uri = `url=${s3BucketUrl}/cluster_${scenario}_lzw.tif&`;
+			const response = await fetch(base + coordinates + uri + options, { signal });
 			if (!response.ok) return;
 
 			const result = (await response.json()) as PointQueryResponse;
@@ -147,7 +151,7 @@ export async function loadProvenanceLayer(
 		selectedCluster !== 0
 	) {
 		const response = await fetch(
-			`https://client-tiles.powergis.at/geoserver/bfw/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=bfw%3Aseed_provenance&` +
+			`${geoserverUrl}/bfw/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=bfw%3Aseed_provenance&` +
 				`CQL_FILTER=cluster=${selectedCluster}%20and%20species='${selectedSpecies.file_name}'` +
 				`&outputFormat=application%2Fjson`
 		);

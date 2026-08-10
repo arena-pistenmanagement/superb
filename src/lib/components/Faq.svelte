@@ -258,7 +258,7 @@
 		Chakraborty, D., Dobor, L., Zolles, A., Hlásny, T., Schueler, S. (2020) High-resolution gridded
 		climate data for Europe based on bias-corrected EURO-CORDEX: the ECLIPS-2.0 dataset. Zenodo. <a
 			class="underline underline-blue-700"
-			href="http://doi.org/10.5281/zenodo.3952159">http://doi.org/10.5281/zenodo.3952159</a
+			href="https://doi.org/10.5281/zenodo.3952159">https://doi.org/10.5281/zenodo.3952159</a
 		>
 	</p>
 	<p>
