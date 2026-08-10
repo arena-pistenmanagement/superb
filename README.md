@@ -192,7 +192,7 @@ npm run preview
 ## Configuration
 
 Do not commit passwords, private API keys, private keys, or unrestricted service credentials.
-The application requires these public environment variables:
+The application requires these public environment variables. The variables can be requested at the BFW (`albert.ciceu ( at ) bfw.gv.at` or `silvio.schueler ( at ) bfw.gv.at`) for development purposes.
 
 - `PUBLIC_MAPBOX_ACCESS_TOKEN`: a restricted public Mapbox token;
 - `PUBLIC_GEOSERVER_URL`: the GeoServer base URL without a trailing slash;
